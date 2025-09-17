@@ -1,0 +1,151 @@
+      body {
+        background: 
+          radial-gradient(ellipse at center, #f5e6c8 0%, #d4b896 50%, #b8956d 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: 'Georgia', serif;
+        perspective: 1000px;
+        overflow: hidden;
+      }
+      
+      .scroll-container {
+        position: relative;
+        width: 800px;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        transform-style: preserve-3d;
+      }
+      
+      .scroll {
+        width: 600px;
+        height: 200px;
+        background: 
+          linear-gradient(45deg, rgba(139, 69, 19, 0.1) 0%, transparent 50%, rgba(139, 69, 19, 0.1) 100%),
+          linear-gradient(135deg, #f8f5f0 0%, #f4f1e8 50%, #ede8dc 100%);
+        border: 3px solid #8b4513;
+        border-radius: 0 15px 15px 0;
+        box-shadow: 
+          0 10px 30px rgba(139, 69, 19, 0.4),
+          inset 0 0 0 2px rgba(210, 180, 140, 0.8),
+          inset 0 3px 6px rgba(255, 255, 255, 0.3);
+        position: absolute;
+        left: 120px;
+        overflow: hidden;
+        opacity: 0;
+        transform: scaleX(0) rotateY(-10deg);
+        transform-origin: left center;
+        transform-style: preserve-3d;
+      }
+      
+      .scroll-content {
+        padding: 30px 40px;
+        font-size: 1.1em;
+        color: #5d4037;
+        text-align: left;
+        line-height: 1.6;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        opacity: 0;
+        transform: translateX(20px);
+        text-shadow: 0 1px 2px rgba(139, 69, 19, 0.1);
+      }
+      
+      .introducao p {
+        font-style: italic;
+        font-size: 1.2em;
+        margin-bottom: 20px;
+        color: #8b4513;
+      }
+      
+      .texto p {
+        margin: 20px 0;
+        font-size: 1em;
+      }
+      
+      .final p {
+        margin: 10px 0;
+        font-style: italic;
+        color: #8b4513;
+      }
+      
+      .rolled-scroll {
+        width: 120px;
+        height: 200px;
+        background: 
+          radial-gradient(ellipse at center, #d4b896, #b8956d),
+          linear-gradient(90deg, #8b4513 0%, #a0522d 50%, #8b4513 100%);
+        border-radius: 60px;
+        border: 3px solid #6b3410;
+        box-shadow: 
+          0 10px 25px rgba(139, 69, 19, 0.5),
+          inset 0 5px 10px rgba(160, 82, 45, 0.6),
+          inset 0 -5px 10px rgba(107, 52, 16, 0.8);
+        position: absolute;
+        left: 0;
+        cursor: pointer;
+        z-index: 10;
+        transform: translateZ(20px) rotateY(5deg);
+        transform-style: preserve-3d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+      
+      .rolled-scroll::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 8px,
+          rgba(107, 52, 16, 0.2) 8px,
+          rgba(107, 52, 16, 0.2) 10px
+        );
+        border-radius: 60px;
+      }
+      
+      .seal {
+        width: 60px;
+        height: 60px;
+        background: 
+          radial-gradient(ellipse at 30% 30%, #ff6b6b, #d32f2f 40%, #b71c1c 70%, #8b1538 100%);
+        border-radius: 50%;
+        border: 3px solid #6d1f2c;
+        box-shadow: 
+          0 6px 15px rgba(183, 28, 28, 0.5),
+          inset 0 2px 5px rgba(255, 255, 255, 0.3),
+          inset 0 -2px 5px rgba(139, 21, 56, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) translateZ(10px);
+        z-index: 15;
+      }
+      
+      .seal-symbol {
+        color: #fff;
+        font-size: 1.8em;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        user-select: none;
+      }
+      
+      .scroll-top {
+        display: none;
+      }
+      
+      .scroll-bottom {
+        display: none;
+      }

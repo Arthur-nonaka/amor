@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/coracao.png" />
+    <title>Cartinha</title>
+  </head>
+  <body>
+    <div class="main-container">
+      <!-- Paper background that slides down -->
+      <div class="paper-background" id="paperBackground">
+        <div class="letter-content" id="letterContent">
+          <div class="introducao">
+            <p>Para o amor da minha vida,</p>
+          </div>
+          <div class="texto">
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta
+              inventore iusto iure dolores sunt consectetur, dolore a ratione
+              omnis sed nihil ut et minima in sapiente pariatur veritatis beatae
+              velit!
+            </p>
+          </div>
+          <div class="final">
+            <p>Com muito amor,</p>
+            <p>Arthur</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll that moves to top -->
+      <div class="scroll-element" id="scrollElement">
+        <img src="images/scroll.png" alt="Scroll" class="scroll-image" />
+        <div class="seal-container" id="sealContainer">
+          <img
+            src="images/seal.png"
+            alt="Seal"
+            class="seal-image"
+            id="sealImage"
+          />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  body {
+    background: #fcfcfc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: "Georgia", serif;
+    perspective: 1000px;
+    overflow: hidden;
+  }
+
+  .main-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .paper-background {
+    position: absolute;
+    width: 600px;
+    height: 800px;
+    background-image: url("images/fundo.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+
+  .letter-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    text-align: center;
+    color: #2c2c2c;
+    z-index: 2;
+  }
+
+  .letter-content .introducao p {
+    font-style: italic;
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    color: #5d4037;
+  }
+
+  .letter-content .texto p {
+    margin: 25px 0;
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #3e2723;
+  }
+
+  .letter-content .final p {
+    margin: 15px 0;
+    font-style: italic;
+    color: #5d4037;
+    font-size: 1.1em;
+  }
+
+  .scroll-element {
+    position: absolute;
+    width: 860px;
+    height: 150px;
+    z-index: 10;
+    cursor: pointer;
+    transform-style: preserve-3d;
+  }
+
+  .scroll-image {
+    width: 100%;
+    height: 100%;
+
+    /* object-fit:; */
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+  }
+
+  .seal-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-35%, -50%);
+    width: 130px;
+    height: 130px;
+    z-index: 15;
+  }
+
+  .seal-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.4));
+    transition: transform filter 0.3s ease;
+  }
+
+  .seal-image:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0px 15px rgba(14, 247, 255, 0.856));
+  }
+</style>
+
+<script>
+  // GSAP Animation for scroll moving up and paper sliding down
+  const scrollElement = document.getElementById("scrollElement");
+  const sealContainer = document.getElementById("sealContainer");
+  const sealImage = document.getElementById("sealImage");
+  const paperBackground = document.getElementById("paperBackground");
+  const letterContent = document.getElementById("letterContent");
+
+  // Set initial states
+  gsap.set(paperBackground, {
+    y: "-110vh",
+    opacity: 1,
+  });
+
+  gsap.set(letterContent, {
+    opacity: 1,
+    y: 30,
+  });
+
+  // Add subtle floating animation to the scroll
+  gsap.to(scrollElement, {
+    y: 30,
+    rotation: 1,
+    duration: 2,
+    ease: "sine.inOut",
+    yoyo: true,
+    repeat: -1,
+  });
+
+  // Seal click animation sequence
+  sealContainer.addEventListener("click", function () {
+    // Prevent multiple clicks
+    sealContainer.style.pointerEvents = "none";
+
+    // Step 1: Seal breaking animation
+    gsap.to(sealImage, {
+      scale: 1.3,
+      rotation: 15,
+      duration: 0.3,
+      ease: "power2.out",
+      onComplete: function () {
+        // Step 2: Seal disappears
+        gsap.to(sealImage, {
+          scale: 0,
+          opacity: 1,
+          rotation: 180,
+          duration: 0.5,
+          ease: "back.in(1.7)",
+          onComplete: function () {
+            // Step 3: Scroll moves to the top
+            gsap.to(scrollElement, {
+              y: "-60vh",
+              scale: 0.8,
+              duration: 1.2,
+              ease: "power3.out",
+              delay: 0.3,
+              repeat: 0,
+              onComplete: function () {
+                gsap.to(scrollElement, {
+                  opacity: 0,
+                  duration: 0,
+                });
+
+                gsap.to(sealImage, {
+                  opacity: 0,
+                  duration: 0,
+                });
+
+                gsap.to(paperBackground, {
+                  y: "0vh",
+                  opacity: 1,
+                  duration: 1.5,
+                  ease: "power3.out",
+                });
+
+                gsap.to(letterContent, {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0,
+                });
+              },
+            });
+          },
+        });
+      },
+    });
+  });
+
+  // Hover effects for the seal
+  sealContainer.addEventListener("mouseenter", function () {
+    gsap.to(sealImage, {
+      scale: 1.1,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  });
+
+  sealContainer.addEventListener("mouseleave", function () {
+    gsap.to(sealImage, {
+      scale: 1,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  });
+</script>
