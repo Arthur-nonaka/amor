@@ -1,49 +1,59 @@
 <!DOCTYPE html>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="images/coracao.png" />
-    <title>Cartinha</title>
-  </head>
-  <body>
-    <div class="main-container">
-      <!-- Paper background that slides down -->
-      <div class="paper-background" id="paperBackground">
-        <div class="letter-content" id="letterContent">
-          <div class="introducao">
-            <p>Para o amor da minha vida,</p>
-          </div>
-          <div class="texto">
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta
-              inventore iusto iure dolores sunt consectetur, dolore a ratione
-              omnis sed nihil ut et minima in sapiente pariatur veritatis beatae
-              velit!
-            </p>
-          </div>
-          <div class="final">
-            <p>Com muito amor,</p>
-            <p>Arthur</p>
-          </div>
-        </div>
-      </div>
 
-      <!-- Scroll that moves to top -->
-      <div class="scroll-element" id="scrollElement">
-        <img src="images/scroll.png" alt="Scroll" class="scroll-image" />
-        <div class="seal-container" id="sealContainer">
-          <img
-            src="images/seal.png"
-            alt="Seal"
-            class="seal-image"
-            id="sealImage"
-          />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="images/coracao.png" />
+  <title>Cartinha</title>
+</head>
+
+<body>
+  <div class="landscape">
+    <div class="flower-container">
+      <img class="flower" src="images/cute-daisy-SVG/flor_amarela.png" alt="Flower 1">
+      <img class="flower" src="images/cute-daisy-SVG/flor_amarela.png" alt="Flower 5">
+      <img class="flower" src="images/cute-daisy-SVG/flor_amarela.png" alt="Flower 5">
+      <img class="flower" src="images/cute-daisy-SVG/flor_rosa.png" alt="Flower 2">
+      <img class="flower" src="images/cute-daisy-SVG/flor_rosa.png" alt="Flower 2">
+      <img class="flower" src="images/cute-daisy-SVG/flor_rosa.png" alt="Flower 4">
+      <img class="flower" src="images/cute-daisy-SVG/flor_roxa.png" alt="Flower 3">
+      <img class="flower" src="images/cute-daisy-SVG/flor_roxa.png" alt="Flower 6">
+    </div>
+  </div>
+  <div class="main-container">
+    <div class="paper-background" id="paperBackground">
+      <div class="letter-content" id="letterContent">
+        <div class="introducao">
+          <p>Para o amor da minha vida,</p>
+        </div>
+        <div class="texto">
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta
+            inventore iusto iure dolores sunt consectetur, dolore a ratione
+            omnis sed nihil ut et minima in sapiente pariatur veritatis beatae
+            velit!
+          </p>
+        </div>
+        <div class="final">
+          <p>Com muito amor,</p>
+          <p>Arthur</p>
         </div>
       </div>
     </div>
-  </body>
+
+    <div class="scroll-element" id="scrollElement">
+      <img src="images/scroll.png" alt="Scroll" class="scroll-image" />
+      <div class="seal-container" id="sealContainer">
+        <img src="images/seal.png" alt="Seal" class="seal-image" id="sealImage" />
+        <p class="seal-text">CLICA NO SELO</p> 
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
 
 <style>
@@ -56,8 +66,84 @@
     margin: 0;
     font-family: "Georgia", serif;
     perspective: 1000px;
-    overflow: hidden;
+    overflow-x: hidden;
   }
+
+  .landscape {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-color: blue;
+    width: 100vw;
+    height: 200vh;
+    background-image: url("images/horizonte.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: blur(1px);
+  }
+
+  .flower {
+    position: fixed;
+    width: 160px;
+    opacity: 1;
+    z-index: -1;
+    transform-origin: center center;
+  }
+
+  .flower-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+
+  .flower:nth-child(1) {
+    top: 52%;
+    left: 12%;
+    rotate: -40deg;
+  }
+
+  .flower:nth-child(2) {
+    top: 36%;
+    left: 15%;
+  }
+
+  .flower:nth-child(3) {
+    top: 60%;
+    left: 20%;
+    rotate: -170deg;
+  }
+
+  .flower:nth-child(4) {
+    top: 50%;
+    right: 10%;
+  }
+
+  .flower:nth-child(5) {
+    top: 50%;
+    right: 30%;
+    rotate: -93deg;
+  }
+
+  .flower:nth-child(6) {
+    top: 9%;
+    right: 4%;
+    rotate: -32deg;
+  }
+
+  .flower:nth-child(7) {
+    top: 17%;
+    right: 10%;
+    rotate: -14deg;
+  }
+
+  .flower:nth-child(8) {
+    top: 60%;
+    right: 24%;
+    rotate: -10deg;
+  }
+
 
   .main-container {
     position: relative;
@@ -71,11 +157,11 @@
   .paper-background {
     position: absolute;
     width: 600px;
-    height: 800px;
+    height: 140vh;
     background-image: url("images/fundo.png");
-    background-size: cover;
+    background-size: contain;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     z-index: 1;
     transform: translateY(-100vh);
     opacity: 0;
@@ -140,6 +226,20 @@
     z-index: 15;
   }
 
+  .seal-text {
+    position: absolute;
+    top: 120%;
+    left: 40%;
+    width: 300px;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 0px 5px rgba(250, 254, 255, 0.836);
+    text-decoration: underline;
+    pointer-events: none;
+  }
+
   .seal-image {
     width: 100%;
     height: 100%;
@@ -162,9 +262,34 @@
   const paperBackground = document.getElementById("paperBackground");
   const letterContent = document.getElementById("letterContent");
 
+  gsap.registerPlugin(ScrollTrigger);
+
+  const flowers = document.querySelectorAll(".flower");
+
+  flowers.forEach((flower, i) => {
+    gsap.to(flower, {
+      rotation: 360,
+      ease: "sine.inOut",
+      scrollTrigger: {
+        trigger: ".landscape",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+      }
+    })
+
+    gsap.to(flower, {
+      y: "+=70",
+      duration: 4 + (i * 1.2),
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+  })
+
   // Set initial states
   gsap.set(paperBackground, {
-    y: "-110vh",
+    y: "-200vh",
     opacity: 1,
   });
 
