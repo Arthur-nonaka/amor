@@ -48,7 +48,7 @@
       <img src="images/scroll.png" alt="Scroll" class="scroll-image" />
       <div class="seal-container" id="sealContainer">
         <img src="images/seal.png" alt="Seal" class="seal-image" id="sealImage" />
-        <p class="seal-text">CLICA NO SELO</p> 
+        <p class="seal-text">CLICA NO SELO</p>
       </div>
     </div>
   </div>
@@ -58,11 +58,12 @@
 
 <style>
   body {
-    background: #fcfcfc;
+    background-image: linear-gradient(180deg, rgb(12, 188, 238) 0%, rgb(145, 227, 231) 50%, rgb(123, 167, 26) 100%);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 200vh;
+    width: 100vw;
     margin: 0;
     font-family: "Georgia", serif;
     perspective: 1000px;
@@ -72,15 +73,16 @@
   .landscape {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 15vw;
     z-index: -1;
     background-color: blue;
-    width: 100vw;
+    width: 70vw;
     height: 200vh;
     background-image: url("images/horizonte.jpg");
     background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    background-size: contain;
+    background-position: top;
+    /* object-fit: contain; */
     filter: blur(1px);
   }
 
