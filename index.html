@@ -30,11 +30,38 @@
           <p>Para o amor da minha vida,</p>
         </div>
         <div class="texto">
+          <p>Dia 18/09/25</p>
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta
-            inventore iusto iure dolores sunt consectetur, dolore a ratione
-            omnis sed nihil ut et minima in sapiente pariatur veritatis beatae
-            velit!
+
+            Oie amore, Hj a gente faz 3 ANOS de namoro, muita coisa, ao mesmo tempo que n né, 3 anos parecem pouco se
+            for ver o quanto a gente vai viver, a gente passou por muita coisa, muita mesmo, acho que nesses últimos
+            anos foram oq eu mais mudei, n posso falar sobre vc, mas acredito que ss, so aparência que continua igual
+            kkkkkk. Não tem como falar como foi esse último ano se n falar que esse ano foi o que a gente mais ficou
+            longe, n lembro quantas vezes a gente se viu, mas foi tipo, 4?, 3 vezes que vc vejo e 1 que eu fui ai, eu
+            acho, mas pode ser que seja algo bom tmb, teve vários problemas, odeio ficar longe, nss, como é triste , mas
+            definitivamente quando a gente ta perto fica mais importante, pq n é como se a gente conseguisse se ver
+            sempre, quando vc ta aqui, a gente sempre tenta dar um jeito de ser ver nem que seja so um pouco todos os
+            dias dkskskakak, to bem ansioso pra acabar suas aulas logo e vc vir ;-;, vem logo amor, quero te dar uns
+            beijão.
+          </p>
+          <p>
+            Eu te amo demais amore, muito muito muito ❤️, quero demais começar a morar junto, decidir as cor da parede,
+            ir comprar móvel, comprar coisa aleatoria pra colocar nas estante, tipo aquela cafeteira sapinho. Imagino
+            tipo, nos 2 tendo um dia cansativo, e de noite vamos estar junto, sem nenhuma preocupação a mais, so ficar
+            junto, comer alguma coisa, jogar um jogo aleatorio ate vc ficar brava ou comigo, ou com o jogo, ir dormir,
+            fazer sapecagens e ser bem feliz. Não duvido nem um pouco que vamos brigar, eu vou te chatear as vezes,
+            nenhuma vez de proposito, mas eu sei que vou, e quando acontecer, espero que vc possa me perdoar, vou fazer
+            o mesmo com vc quando vc me magoar tmb, mas além de problemas de adulto😑, acredito que no futuro vai dar
+            tudo certo, eu sei que vai, eu te amo muito.
+          </p>
+          <p>
+            E tmb quero te dar logo o presente, vou te dar mais uma dica, vc ja falou oq é, das 10 coisas que vc chutou,
+            hehe, eu espero muito que vc goste, e tmb hj n vai ter buqeu de flores, o dinheiro foi tudo no presente,
+            kdkskskskss, mesmo que de pra comprar algum buquezinho menor, preferi fazer essa cartinha e mais pra frente
+            eu compro as flores, e vc n vai saber que dia vai ser🐕 kdsksksksk
+            Essa cartinha foi mais diferentes que as outras, foi legal de fazer, Eu te amo mesmo muito amor, desculpa
+            pelas vezes que eu te fiz se sentir mal, insegura, eu te amo de verdade ta bom &lt;3, vou estar ansioso te
+            esperando vir
           </p>
         </div>
         <div class="final">
@@ -52,6 +79,7 @@
       </div>
     </div>
   </div>
+  <div id="player"></div>
 </body>
 
 </html>
@@ -80,7 +108,7 @@
     height: 200vh;
     background-image: url("images/horizonte.jpg");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     background-position: top;
     /* object-fit: contain; */
     filter: blur(1px);
@@ -153,15 +181,15 @@
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
   }
 
   .paper-background {
     position: absolute;
-    width: 600px;
-    height: 140vh;
+    width: 800px;
+    height: 170vh;
     background-image: url("images/fundo.png");
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: repeat;
     z-index: 1;
@@ -170,12 +198,9 @@
   }
 
   .letter-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    text-align: center;
+    padding: 40px;
+    width: 90%;
+    text-align: left;
     color: #2c2c2c;
     z-index: 2;
   }
@@ -189,7 +214,7 @@
 
   .letter-content .texto p {
     margin: 25px 0;
-    font-size: 1.1em;
+    font-size: 1.3em;
     line-height: 1.6;
     color: #3e2723;
   }
@@ -254,6 +279,12 @@
     transform: scale(1.1);
     filter: drop-shadow(0 0px 15px rgba(14, 247, 255, 0.856));
   }
+
+  #player {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
 </style>
 
 <script>
@@ -265,6 +296,27 @@
   const letterContent = document.getElementById("letterContent");
 
   gsap.registerPlugin(ScrollTrigger);
+
+  let tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.head.appendChild(tag);
+
+  let player;
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: 0,
+      width: 0,
+      videoId: "CnVVjLOGVoY",
+      playerVars: {
+        'playsinline': 1
+      }
+    })
+  }
+
+  function onPlayerReady(event) {
+    console.log("Player is ready");
+  }
 
   const flowers = document.querySelectorAll(".flower");
 
@@ -291,7 +343,7 @@
 
   // Set initial states
   gsap.set(paperBackground, {
-    y: "-200vh",
+    y: "-300vh",
     opacity: 1,
   });
 
@@ -312,6 +364,8 @@
 
   // Seal click animation sequence
   sealContainer.addEventListener("click", function () {
+    if (player) player.playVideo();
+
     // Prevent multiple clicks
     sealContainer.style.pointerEvents = "none";
 
@@ -350,7 +404,7 @@
                 });
 
                 gsap.to(paperBackground, {
-                  y: "0vh",
+                  y: "-40vh",
                   opacity: 1,
                   duration: 1.5,
                   ease: "power3.out",
